@@ -2,6 +2,15 @@ document.getElementById("htmlCode").value="<div>\n\n</div>";
 document.getElementById("cssCode").value="<style>\n\n</style>";
 document.getElementById("jsCode").value="<script>\n\n</script>";
 
+if(localStorage.getItem("Html")!=='' && localStorage.getItem("Css")!=='' && localStorage.getItem("Js") !==''){
+let savedHtmlCode = localStorage.getItem("Html");
+let savedCssCode = localStorage.getItem("Css");
+let savedJsCode = localStorage.getItem("Js");
+document.getElementById("htmlCode").value= savedHtmlCode;
+document.getElementById("cssCode").value = savedCssCode;
+document.getElementById("jsCode").value = savedJsCode;
+showPreview();}
+
 function showPreview(){
     var htmlCode = document.getElementById("htmlCode").value;
     var cssCode = ""+document.getElementById("cssCode").value+"";
@@ -10,6 +19,13 @@ function showPreview(){
     frame.open();
     frame.write(htmlCode+cssCode+jsCode);
     frame.close();
+    saveCode(htmlCode,cssCode,jsCode);
+}
+
+function saveCode(html,css,js){
+    let savedHtmlCode = localStorage.setItem("Html", html);
+    let savedCssCode = localStorage.setItem("Css", css);
+    let savedJsCode = localStorage.setItem("Js", js);
 }
 
 function show(x){
